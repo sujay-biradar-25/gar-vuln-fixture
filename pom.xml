@@ -6,7 +6,7 @@
 
   <groupId>ai.endor.gartest</groupId>
   <artifactId>vulnapp</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>vulnapp</name>
   <description>Sample project whose only direct dependency is a private GAR package</description>
