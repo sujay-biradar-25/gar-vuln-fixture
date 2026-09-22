@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>ai.endor.gartest</groupId>
+  <artifactId>vulnapp</artifactId>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  <name>vulnapp</name>
+  <description>Sample project whose only direct dependency is a private GAR package</description>
+
+  <properties>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <!-- vulnlib resolves only from the private Artifact Registry repository, so a
+       scan that cannot authenticate to GAR fails to resolve it rather than
+       silently falling back to Central. -->
+  <repositories>
+    <repository>
+      <id>artifact-registry</id>
+      <url>artifactregistry://us-central1-maven.pkg.dev/gar-scope-test-sb/scope-test</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>ai.endor.gartest</groupId>
+      <artifactId>vulnlib</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>com.google.cloud.artifactregistry</groupId>
+        <artifactId>artifactregistry-maven-wagon</artifactId>
+        <version>2.2.0</version>
+      </extension>
+    </extensions>
+  </build>
+</project>
